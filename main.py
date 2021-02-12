@@ -6,3 +6,5 @@ root.geometry('360x360')
 root.title('Aloha')
 
 root.mainloop()
+
+print("Hello GAY");
