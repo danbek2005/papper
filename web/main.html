@@ -7,16 +7,29 @@
     <script src="eel.js"></script>
 </head>
 <body>
-<header>Pass Manager</header>
+<header><h5>Facebook auto authorization</h5></header>
 <main>
-<!--    <input id="link" type="text" placeholder="Введите ссылку">-->
-<!--    <input id="username" type="text" placeholder="Введите имя">-->
-<!--    <input id="password" type="text" placeholder="Введите пароль">-->
-<!--    <button id="auth">Авторизоваться</button>-->
+    <div id="container">
+        <label for="mail" class="field">
+        <input id="mail" type="text" placeholder="enter your mail">
+    </label>
+    <label for="password" class="field">
+        <input id="password" type="text" placeholder="enter your password">
+    </label>
+    <button id="auth_btn">
+        Auth
+    </button>
+    </div>
 </main>
-
 </body>
-<footer>
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-</footer>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            auth_btn.onclick = () => {
+                let mail = document.getElementById("mail")
+                let password = document.getElementById("password")
+                eel.auth(mail.value, password.value)()
+            }
+        })
+</script>
 </html>
