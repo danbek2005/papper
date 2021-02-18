@@ -1,0 +1,44 @@
+@font-face{
+	font-family: Abel;
+	src: url(../fonts/Abel-Regular.ttf);
+}
+html{
+	width: 20em;
+	height: 16em;
+}
+
+*{
+	font-family: Abel;
+}
+
+#status{
+	display: flex;
+	flex-direction: row;
+	justify-content: start;
+	align-items: center;
+	font-size: 15px;
+	margin-top: -0.8em;
+}
+#status > img{
+	width: 8%;
+	margin-right: 0.4em;
+}
+
+#auth{
+	display: none;
+	float: left;
+}
+#auth > .field {
+	display: flex;
+	flex-direction: column;
+	clear: both;
+	text-align: left;
+	margin-bottom: 1em;
+}
+#auth > .field > label{
+	float: left;
+	padding-right: 1em;
+}
+#auth > .field > input{
+	padding: 4px;
+}
