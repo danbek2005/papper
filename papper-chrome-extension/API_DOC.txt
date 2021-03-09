@@ -11,8 +11,16 @@ POPUP STREAM:
         TYPE: SET-APP-STATUS
         DATA: bool
 
+        #
+        TYPE: GET-AUTH-STATUS
+        DATA:
+
     BACKGROUND -> POPUP
         
         #
         TYPE: RETURN-APP-STATUS
+        DATA: bool
+
+        #
+        TYPE: RETURN-AUTH-STATUS
         DATA: bool
