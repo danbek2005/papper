@@ -1,12 +1,3 @@
-function sleep(miliseconds) {
-    var currentTime = new Date().getTime();
- 
-    while (currentTime + miliseconds >= new Date().getTime()) {
-    }
- }
-
-
-
 class PopupUI {
 
     life = this
@@ -33,8 +24,8 @@ class PopupUI {
                 return document.getElementById("switch_status").checked
             },
             set: (bool) => {
-                console.log(bool)
                 document.getElementById("switch_status").checked = bool
+                this.life.UI.switch_footer(bool)
             }
         },
         show_auth_status_el: () => {
@@ -44,7 +35,14 @@ class PopupUI {
                 } else {
                     el.innerHTML = "<h4 class='auth_msg'>#Authorization is successful</h4><img class='auth_img' src='images/green.svg'/>"
                 }
+        },
+        switch_footer: (bool) => {
+            if(bool){
+                document.getElementsByTagName("footer")[0].innerHTML = "working..."
+            }else if(!bool){
+                document.getElementsByTagName("footer")[0].innerHTML = "doesn't work..."
             }
+        }
 
     }
     appStatus = {
@@ -52,6 +50,7 @@ class PopupUI {
             this.life.STREAM.send({ type: "GET-APP-STATUS" })
             this.life.STREAM.get("RETURN-APP-STATUS", (data) => {
                 this.life.UI.switch_el.set(data)
+
             })
         },
         set: (data) => {
@@ -62,18 +61,22 @@ class PopupUI {
         get: () => {
             this.life.STREAM.send({ type: "GET-AUTH-STATUS" })
             return this.life.STREAM.get("RETURN-AUTH-STATUS", (data) => {
-                return data;
+                this.life.IS_AUTH = data
+                this.life.UI.show_auth_status_el()
             })
         }
     }
     constructor() {
         this.STREAM.start()
         this.appStatus.get()
-        this.IS_AUTH = this.authStatus
-        this.UI.show_auth_status_el()
+        this.authStatus.get()
     }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
     popup = new PopupUI()
+    document.getElementById("switch_status").addEventListener("change", (el) => {
+        popup.appStatus.set(el.target.checked)
+        popup.UI.switch_footer(el.target.checked)
+    })
 })

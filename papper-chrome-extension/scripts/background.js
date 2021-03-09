@@ -1,4 +1,4 @@
-APP_STATUS = false
+APP_STATUS = true
 AUTH_STATUS = false
 
 
@@ -12,16 +12,7 @@ put_script = (name) => {
     chrome.tabs.executeScript(null, { file: "scripts/" + name + ".js" })
 }
 
-track_rebooting = (id, d) => {
-    chrome.tabs.query({ status: "loading", tabId: id }, () => {
-        if (domain.get() == d) {
-            put_script("foreground")
-        }
-    })
-}
-
 interval = () => {
-    console.log(APP_STATUS)
     chrome.tabs.query({ active: true }, tabs => {
         chrome.tabs.sendMessage(tabs[0].id, { message: "PING" }, res => {
             console.log(res)
@@ -55,6 +46,9 @@ chrome.extension.onConnect.addListener((port) => {
             }
             if(message.type == "GET-APP-STATUS"){
                 port.postMessage({type: "RETURN-APP-STATUS", data: APP_STATUS})
+            }
+            if(message.type == "SET-APP-STATUS"){
+                APP_STATUS = message.data
             }
         })
     }
