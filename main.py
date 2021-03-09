@@ -1,6 +1,17 @@
 import eel
 import urllib3
 
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+chrome = webdriver.Chrome()
+
+waiter = WebDriverWait(chrome, 300)
+
+
+
 url = "https://ftl.kherson.ua"
 domain = url.split('/')[2]
 _http = urllib3.PoolManager()

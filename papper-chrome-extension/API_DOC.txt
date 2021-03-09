@@ -1,0 +1,18 @@
+
+POPUP STREAM:
+
+    POPUP -> BACKGROUND
+
+        #
+        TYPE: GET-APP-STATUS
+        DATA: 
+
+        #
+        TYPE: SET-APP-STATUS
+        DATA: bool
+
+    BACKGROUND -> POPUP
+        
+        #
+        TYPE: RETURN-APP-STATUS
+        DATA: bool

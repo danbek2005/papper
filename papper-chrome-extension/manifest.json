@@ -5,10 +5,14 @@
 	"version": "0.0.1",
 	"icons": {"128": "logo_128.png"},
 	"browser_action": {
-		"default_icon": "logo_128.png",
 		"default_popup": "popup.html"
 	},
-	"permissions": ["activeTab", "tabs"],
+	"permissions": [
+		"activeTab", 
+		"tabs", 
+		"storage",
+		"<all_urls>"
+	],
 	"content_scripts": [
 		{
 		  "matches": [
@@ -16,5 +20,9 @@
 		  ],
 		  "js": ["./scripts/popup.js"]
 		}
-	]
+	],
+	"background": {
+		"scripts": ["./scripts/background.js"],
+		"persistent": true
+	}
 }
